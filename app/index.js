@@ -1,16 +1,34 @@
 var moment = require('moment');
 const chalk = require('chalk');
-// moment().format();
+
+// console.log(chalk.blue('Hello world!'));
 
 
-// moment(Date);
+var now = chalk.blue.bold(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
+var nth_day_of_year = chalk.magenta.bold(moment().format("DDDo"));
+// var seconds_into_the_day = moment([2017, 7, 14]).toNow(Boolean);
 
-var now = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
-var nth_day_of_year = moment().format("DDDo");
-// var seconds_into_the_day = moment().format("DDDo");
-// var daylightSavings =
-var leapYear = moment().isLeapYear();
+var a = moment();
+var b = moment([2017, 7, 14]);
+var seconds = chalk.cyanBright.bold(a.diff(b, 'seconds'));
+
+
+var daylightSavings = moment().isDST();
+var daylightIs = "";
+
+
+function daylightTrueFalse(){
+  if (daylightSavings === true){
+    daylightIs = "is";
+  }else{
+    daylightIs = "is not";
+  }
+  return daylightIs;
+}
+
+var leapYear = (moment().isLeapYear());
 var leapYearIs = "";
+
 
 function leapYearTrueFalse() {
   if (leapYear === true){
@@ -22,18 +40,10 @@ function leapYearTrueFalse() {
 }
 
 
-// var b = moment([2017, 1, 1]);
-// var a = moment([2017, 8, 14]);
-// var nth_day_of_year = moment().dayOfYear();
-
-// a.diff(b, 'days');
-
-
-// var day = new Date(2011, 9, 16);
-// var dayWrapper = moment(day);
-
 
 console.log(`It is ${now}.`)
 console.log(`It is the ${nth_day_of_year} day of the year.`);
-// console.log(`It is ${} seconds into the day.`);
-console.log(`It ${leapYearTrueFalse(leapYear)} a leap year.`)
+console.log(`It is ${seconds} seconds into the day.`);
+// console.log(`It ${daylightTrueFalse(daylightSavings)} during Daylight Savings Time.`);
+console.log("It " + chalk.green.bold(daylightTrueFalse(daylightSavings)) + " during Daylight Savings Time.");
+console.log("It " + chalk.red.bold(leapYearTrueFalse(leapYear)) + " a leap year.");
